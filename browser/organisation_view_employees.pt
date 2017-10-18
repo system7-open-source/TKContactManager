@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master">
+  <body>
+
+    <metal:main fill-slot="main">
+      
+      <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading" 
+	    tal:content="context/Title"> 
+          Title
+        </h1>
+
+	<h3>
+	  Employee Information
+	</h3>
+	
+	<tal:batch define="batch view/getBatchedEmployees;
+			   batch_base_url string:view_employees">
+
+	  <div tal:define="min python: ((batch.pagenumber-1) * batch.size)+1;
+			   max python: min + batch.length - 1;"
+	       class="info" i18n:translate="">
+	    Showing <span tal:content="min" i18n:name="min" />-<span tal:content="max" i18n:name="max" />
+	    of <span tal:content="batch/sequence_length" i18n:name="total" /> 
+	  </div>
+	  
+	  <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+	  <ul>
+	    <li tal:repeat="emp batch">
+	      <a tal:content="emp/Title" 
+		 tal:attributes="href emp/absolute_url" />
+	      <span tal:condition="emp/getJobTitle"
+		    tal:content="string:(${emp/getJobTitle})" />
+	    </li>
+	  </ul>
+
+	</tal:batch>
+
+
+      </tal:main-macro>
+
+    </metal:main>
+
+  </body>
+</html>
+

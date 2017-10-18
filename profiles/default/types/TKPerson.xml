@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="TKPerson"
+        meta_type="Factory-based Type Information with dynamic views"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+  <property name="default_view">@@view</property>
+  <property name="view_methods">
+    <element value="base_view"/>
+    <element value="@@view"/>
+  </property>
+
+</object>

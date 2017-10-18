@@ -1,0 +1,110 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="TKContactManager">
+
+  <include package="plone.app.contentmenu" />
+
+
+  <!-- Define the main views of each content type. The 'for' attribute
+       specifies which type of content the view will be available for,
+       and since these are all different, we do not get conflicts even
+       though they all share the same 'name'. The 'permission' is a
+       permission which is required to access the view. The 'class'
+       attribute specifies a view class which will be used to render
+       the page.
+
+       We also define an icon for each type, and a shared stylesheet. The
+       stylesheet is included in various templates explicitly.
+
+       Note that the Film Folder type uses only standard Plone templates
+       for its views, so no additional views are defined here.
+    -->
+  
+  <browser:page
+     for="..interfaces.ITKPerson.ITKPerson"
+     name="contactdetails"
+     class=".person.PersonView"
+     template="contactdetails.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="..interfaces.ITKOrganisation.ITKOrganisation"
+     name="contactdetails"
+     class=".person.PersonView"
+     template="contactdetails.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="..interfaces.ITKPerson.ITKPerson"
+     name="view"
+     class=".person.PersonView"
+     template="person.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="..interfaces.ITKOrganisation.ITKOrganisation"
+     name="view"
+     class=".person.OrganisationView"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="..interfaces.ITKOrganisation.ITKOrganisation"
+     name="view_employees"
+     template="organisation_view_employees.pt"
+     class=".person.EmployeeView"
+     permission="zope2.View"
+     />
+
+  <browser:menuItem
+     for="..interfaces.ITKPerson.ITKPerson"
+     menu="plone_displayviews"
+     title="Person view"
+     action="@@view"
+     description="Default representation of a person"
+     />
+
+  <browser:menuItem
+     for="..interfaces.ITKOrganisation.ITKOrganisation"
+     menu="plone_displayviews"
+     title="Organisation view"
+     action="@@view"
+     description="Default representation of a organisation"
+     />
+
+  <!-- Resource directory for stylesheets -->
+  <browser:resourceDirectory
+     name="TKContactManager.stylesheets"
+     directory="stylesheets"
+     />
+
+  <!-- Resource directory for client side scripts -->
+  <browser:resourceDirectory
+     name="TKContactManager.scripts"
+     directory="js"
+     />
+
+  <browser:page
+     for="Products.TKContactManager.content.TKAddress.TKAddress"
+     name="maps_googlemaps_enabled_view"
+     class="Products.Maps.browser.map.LocationMapView"
+     permission="zope.Public"
+     allowed_interface="Products.Maps.interfaces.map.IMapEnabledView"
+     />
+
+  <browser:page
+     for="Products.TKContactManager.content.TKAddress.TKAddress"
+     name="maps_googlemaps_view"
+     class="Products.Maps.browser.map.LocationMapView"
+     permission="zope2.View"
+     allowed_interface="Products.Maps.interfaces.map.IMapView"
+     />
+
+
+</configure>
+
+

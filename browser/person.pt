@@ -1,0 +1,133 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master">
+  <body>
+
+    <metal:css fill-slot="css_slot"
+               tal:define="config context/@@maps_configuration">
+
+      <style type="text/css" media="all"
+             tal:content="string: @import url(${context/++resource++TKContactManager.stylesheets/person.css});"></style>
+
+      <script type="text/javascript"
+              tal:attributes="src string:${context/++resource++TKContactManager.scripts/mootools-release-1.11.js}">
+      </script>
+
+      <script type="text/javascript"
+	      tal:attributes="src string:http://www.google.com/jsapi?key=${config/googlemaps_key}">
+      </script>
+      
+      <script type="text/javascript"
+              tal:attributes="src string:${context/++resource++TKContactManager.scripts/person.js}">
+      </script>
+      
+    </metal:css>
+
+    <metal:main fill-slot="main">
+      
+      <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading" 
+	    tal:content="context/getFullName"> 
+          Title
+        </h1>
+	
+	<metal:contactdetails 
+	   use-macro="context/contactdetails/macros/contactdetails" />
+
+	<fieldset class="foldable">
+	  <legend>Business Information</legend>
+	  <div class="info">
+
+	    <p tal:condition="here/getUsername">
+	      <label for="jobTitle">User ID:</label>
+	      <a tal:attributes="href string:${portal_url}/Members/${here/getUsername}"
+		 tal:content="here/getUsername"/>
+	    </p>
+
+	    <label for="responsibilities">Responsibilities</label>
+	    <span metal:use-macro="python: 
+				   context.widget('responsibilities')" />
+
+	    <tal:info define="contacts python: [
+			      'employers',
+			      'manages',
+			      'coworkers',
+			      'primaryContactForPersons',
+			      'secondaryContactForPersons',
+			      'primaryContactForOrganisations',
+			      'secondaryContactForOrganisations',
+			      'diaries',
+			      'annotations',
+			      ]">
+	      <tal:items repeat="c contacts">
+		<div tal:define="field python: context.getField(c);
+				 label field/widget/label;
+				 rel field/relationship;"
+		     tal:condition="python: view.isRelation(rel)">
+		  <label tal:attributes="for c"
+			 tal:content="python: 
+				      '%s:' % field.widget.label" />
+		  <span metal:use-macro="python:context.widget(c)" />
+		</div>
+	      </tal:items>	      
+	    </tal:info>
+
+	  </div>
+	</fieldset>
+
+	<fieldset class="foldable"
+		  tal:condition="here/getBiography">
+	  <legend>Biography</legend>
+	  <div class="info">
+	    <label for="biography">Biography:</label>
+	    <span metal:use-macro="python: context.widget('biography')" />
+	  </div>
+	</fieldset>
+
+	<tal:extraschema define="extraschemata python:
+				 getattr(here, 'extraschemata', [])">
+	  <fieldset class="foldable"
+		    tal:repeat="schemata extraschemata">
+	    <legend tal:content="schemata"></legend>
+	    <tal:extrafield repeat="f python:here.Schema().getSchemataFields(schemata)">
+	      <!-- check the field has a value -->
+	      <div class="info" tal:condition="python:f.getAccessor(here)()">
+		<label tal:attributes="for f/getName"><span tal:replace="f/widget/label" />:</label>
+		<span metal:use-macro="python: context.widget(f.getName())" />
+	      </div>
+	    </tal:extrafield>
+	  </fieldset>
+	</tal:extraschema>
+
+	<fieldset class="foldable"
+		  tal:define="contents view/getPersonContents"
+		  tal:condition="contents">
+	  <legend>Folder contents</legend>
+	  <div class="info">
+	    <ul>
+	      <li tal:repeat="item contents">
+		<a tal:attributes="href item/getURL"
+		   tal:content="item/Title" />
+		<span tal:content="string:(${item/Type})" />
+	      </li>
+	    </ul>
+	  </div>
+	</fieldset>
+	
+	<div tal:replace="structure provider:plone.belowcontenttitle" /> 
+	
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+
+      </tal:main-macro>
+
+    </metal:main>
+
+  </body>
+</html>
+

@@ -1,0 +1,407 @@
+<?xml version="1.0" ?>
+<RelationsLibrary>
+  <RulesetCollection id="TKContactManager">
+    <Ruleset id="employees_employers" uid="Im495629bbm11362d8fe73mm730d">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="employers_employees"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="employers_employees" uid="employers_employees">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im495629bbm11362d8fe73mm730d"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="primarycontactforpersons_ourprimarycontactsforthisperson" uid="Im4f227e14m11368c66930mm7b87">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="ourprimarycontactsforthisperson_primarycontactforpersons"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="ourprimarycontactsforthisperson_primarycontactforpersons" uid="ourprimarycontactsforthisperson_primarycontactforpersons">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im4f227e14m11368c66930mm7b87"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="tkperson_annotations" uid="Im7691600am11657e000a0mm49f0">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedTargetInterface>
+	  IContactAnnotation
+	</allowedTargetInterface>
+      </InterfaceConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="annotations_tkperson"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="annotations_tkperson" uid="annotations_tkperson">
+      <TypeConstraint id="type_constraint">
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedSourceInterface>
+	  IContactAnnotation
+	</allowedSourceInterface>
+      </InterfaceConstraint>
+      <CardinalityConstraint id="cardinality">
+	<maxTargetCardinality>
+	  1
+	</maxTargetCardinality>
+      </CardinalityConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im7691600am11657e000a0mm49f0"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="concerningperson_diaries" uid="Im7691600am11657e000a0mm4a18">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedTargetInterface>
+	  IContactDiary
+	</allowedTargetInterface>
+      </InterfaceConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="diaries_concerningperson"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="diaries_concerningperson" uid="diaries_concerningperson">
+      <TypeConstraint id="type_constraint">
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedSourceInterface>
+	  IContactDiary
+	</allowedSourceInterface>
+      </InterfaceConstraint>
+      <CardinalityConstraint id="cardinality">
+	<maxTargetCardinality>
+	  1
+	</maxTargetCardinality>
+      </CardinalityConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im7691600am11657e000a0mm4a18"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="manages_reportingto" uid="Im4f227e14m11368c66930mm7bb3">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="reportingto_manages"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="reportingto_manages" uid="reportingto_manages">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im4f227e14m11368c66930mm7bb3"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="oursecondarycontactsforthisorganisation_secondarycontactfororganisations" uid="Im1f14e877m113ba6a686cmm7417">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="secondarycontactfororganisations_oursecondarycontactsforthisorganisation"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="secondarycontactfororganisations_oursecondarycontactsforthisorganisation" uid="secondarycontactfororganisations_oursecondarycontactsforthisorganisation">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im1f14e877m113ba6a686cmm7417"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="TKShare" uid="Im4f227e14m11368c66930mm7b14">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <ContentReference id="content_reference">
+	<portalType>
+	  TKShare
+	</portalType>
+	<shareWithInverse>
+	  1
+	</shareWithInverse>
+	<primary>
+	  1
+	</primary>
+      </ContentReference>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="subsidiaries_associates_parents"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="subsidiaries_associates_parents" uid="subsidiaries_associates_parents">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <ContentReference id="content_reference">
+	<portalType>
+	  TKShare
+	</portalType>
+	<shareWithInverse>
+	  1
+	</shareWithInverse>
+	<primary>
+	  0
+	</primary>
+      </ContentReference>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im4f227e14m11368c66930mm7b14"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="ourprimarycontactsforthisorganisation_primarycontactfororganisations" uid="Im12c154f2m11395cf6b65mm772a">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="primarycontactfororganisations_ourprimarycontactsforthisorganisation"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="primarycontactfororganisations_ourprimarycontactsforthisorganisation" uid="primarycontactfororganisations_ourprimarycontactsforthisorganisation">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <CardinalityConstraint id="cardinality">
+	<maxTargetCardinality>
+	  1
+	</maxTargetCardinality>
+      </CardinalityConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im12c154f2m11395cf6b65mm772a"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="secondarycontactforpersons_oursecondarycontactsforthisperson" uid="Im1f14e877m113ba6a686cmm7443">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="oursecondarycontactsforthisperson_secondarycontactforpersons"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="oursecondarycontactsforthisperson_secondarycontactforpersons" uid="oursecondarycontactsforthisperson_secondarycontactforpersons">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im1f14e877m113ba6a686cmm7443"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="suppliers_client" uid="Im4f227e14m11368c66930mm73f6">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="client_suppliers"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="client_suppliers" uid="client_suppliers">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im4f227e14m11368c66930mm73f6"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="coworkers_coworkers" uid="Im4f227e14m11368c66930mm7b5b">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="coworkers_coworkers_inv"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="coworkers_coworkers_inv" uid="coworkers_coworkers_inv">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKPerson
+	</allowedSourceType>
+	<allowedTargetType>
+	  TKPerson
+	</allowedTargetType>
+      </TypeConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im4f227e14m11368c66930mm7b5b"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="concerningorganisation_diaries" uid="Im7691600am11657e000a0mm491a">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedTargetInterface>
+	  IOrganisationDiary
+	</allowedTargetInterface>
+      </InterfaceConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="diaries_concerningorganisation"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="diaries_concerningorganisation" uid="diaries_concerningorganisation">
+      <TypeConstraint id="type_constraint">
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedSourceInterface>
+	  IOrganisationDiary
+	</allowedSourceInterface>
+      </InterfaceConstraint>
+      <CardinalityConstraint id="cardinality">
+	<maxTargetCardinality>
+	  1
+	</maxTargetCardinality>
+      </CardinalityConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im7691600am11657e000a0mm491a"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="concerningorganisation_annotations" uid="Im7691600am11657e000a0mm4942">
+      <TypeConstraint id="type_constraint">
+	<allowedSourceType>
+	  TKOrganisation
+	</allowedSourceType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedTargetInterface>
+	  IOrganisationAnnotation
+	</allowedTargetInterface>
+      </InterfaceConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="annotations_concerningorganisation"/>
+      </InverseImplicator>
+    </Ruleset>
+    <Ruleset id="annotations_concerningorganisation" uid="annotations_concerningorganisation">
+      <TypeConstraint id="type_constraint">
+	<allowedTargetType>
+	  TKOrganisation
+	</allowedTargetType>
+      </TypeConstraint>
+      <InterfaceConstraint id="interface_constraint">
+	<allowedSourceInterface>
+	  IOrganisationAnnotation
+	</allowedSourceInterface>
+      </InterfaceConstraint>
+      <CardinalityConstraint id="cardinality">
+	<maxTargetCardinality>
+	  1
+	</maxTargetCardinality>
+      </CardinalityConstraint>
+      <InverseImplicator id="inverse_relation">
+	<inverseRuleset uidref="Im7691600am11657e000a0mm4942"/>
+      </InverseImplicator>
+    </Ruleset>
+  </RulesetCollection>
+</RelationsLibrary>
+

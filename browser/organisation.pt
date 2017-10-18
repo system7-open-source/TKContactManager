@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master">
+  <body>
+
+    <metal:css fill-slot="css_slot"
+               tal:define="config context/@@maps_configuration">
+
+      <style type="text/css" media="all"
+             tal:content="string: @import url(${context/++resource++TKContactManager.stylesheets/person.css});"></style>
+
+      <script type="text/javascript"
+              tal:attributes="src string:${context/++resource++TKContactManager.scripts/mootools-release-1.11.js}">
+      </script>
+
+      <script type="text/javascript"
+	      tal:attributes="src string:http://www.google.com/jsapi?key=${config/googlemaps_key}">
+      </script>
+      
+      <script type="text/javascript"
+              tal:attributes="src string:${context/++resource++TKContactManager.scripts/person.js}">
+      </script>
+      
+    </metal:css>
+
+    <metal:main fill-slot="main">
+      
+      <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading" 
+	    tal:content="context/Title"> 
+          Title
+        </h1>
+
+	<metal:contactdetails use-macro="context/contactdetails/macros/contactdetails" />
+
+	<fieldset class="foldable">
+	  <legend>Business Information</legend>
+	  <div class="info">
+
+	    <tal:info define="info python: [
+			      'client',
+			      'diaries',
+			      'annotations',
+			      'subsidiaries_associates',
+			      'suppliers',
+			      'parents',
+			      ]">
+	      <tal:items repeat="item info">
+		<div tal:define="field python: context.getField(item);
+				 label field/widget/label;
+				 rel field/relationship;"
+		     tal:condition="python: view.isRelation(rel)">
+		  <label tal:attributes="for item"
+			 tal:content="python: 
+				      '%s:' % field.widget.label" />
+		  <span metal:use-macro="python:context.widget(item)" />
+		</div>
+	      </tal:items>	      
+	    </tal:info>
+
+	  </div>
+	</fieldset>
+
+	<fieldset class="foldable">
+	  <legend>Organisation Details</legend>
+	  <div class="info">
+	    <label for="name">Name:</label>
+	    <span metal:use-macro="python: context.widget('name')" />
+
+	    <label for="registrationNumber">Registration Number:</label>
+	    <span metal:use-macro="python: context.widget('registrationNumber')" />
+
+	    <label for="registrationNumber">VAT Number:</label>
+	    <span metal:use-macro="python: context.widget('VATNumber')" />
+	  </div>
+	</fieldset>
+
+
+	<fieldset class="foldable"
+		  tal:define="contents view/getPersonContents"
+		  tal:condition="contents">
+	  <legend>Folder contents</legend>
+	  <div class="info">
+	    <ul>
+	      <li tal:repeat="item contents">
+		<a tal:attributes="href item/getURL"
+		   tal:content="item/Title" />
+		<span tal:content="string:(${item/Type})" />
+	      </li>
+	    </ul>
+	  </div>
+	</fieldset>
+
+
+	<div tal:replace="structure provider:plone.belowcontenttitle" /> 
+	
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+
+      </tal:main-macro>
+
+    </metal:main>
+
+  </body>
+</html>
+

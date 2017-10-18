@@ -1,0 +1,136 @@
+<metal:contactdetails define-macro="contactdetails">
+
+  <fieldset class="details foldable default_open"
+	    tal:define="addresses python: 
+			view.getContactItems('TKAddress');
+			numbers python:
+			view.getContactItems('TKTelephoneNumber');
+			emails python:
+			view.getContactItems('TKEmailAddress');
+			messengers python:
+			view.getContactItems('TKInstantMessengerContact');
+			websites python:
+			view.getContactItems('TKWebpage')">
+
+    <legend>Contact Details</legend>
+
+    <div class="info">
+      
+      <div id="addresses" tal:condition="addresses">
+	<p><b>Addresses:</b></p>
+	<ul class="wide preview">
+	  <li tal:repeat="a python: [ x.getObject() for x in addresses ]">
+	    <b tal:content="a/Title" />
+	    <a href="#" 
+	       tal:condition="python: a.getGeolocation() != (0, 0)"
+	       class="maplink">(Show map)
+	      <input type="hidden" class="title" 
+		     tal:attributes="value a/Title" />
+	      <input type="hidden" class="markertype" 
+		     tal:attributes="value a/getMarker" />
+	      <input type="hidden" class="geolocation"
+		     tal:attributes="value python: 
+				     '%s,%s' % (a.getGeolocation()[0], 
+				     a.getGeolocation()[1])" />
+	    </a>
+	    <br />
+	    <span tal:content="structure python: 
+			       '<br />'.join(a.getStreet())" />
+	    <br />
+	    <span tal:content="a/getCity" />
+	    <br />
+	    <span tal:content="a/getPostcode" />
+	    <br />
+	    <span tal:content="a/getCountry" />
+	    <br />
+	  </li>
+	</ul>
+	<div class="clear"></div>
+      </div>
+
+      <div id="numbers" tal:condition="numbers">
+	<p><b>Telephone</b></p>
+	<ul class="preview">
+	  <li tal:repeat="n python: [ x.getObject() for x in numbers ]">
+	    <span tal:content="n/Title" />
+	    <span tal:content="string:(${n/getPhoneType})" />
+	    <br />
+	    <span tal:content="n/getFormattedNumber" />
+	  </li>
+	</ul>
+      </div>
+
+      <div id="emails" tal:condition="emails">
+	<p><b>Email</b></p>
+	<ul class="preview">
+	  <li tal:repeat="e python: [ x.getObject() for x in emails ]">
+	    <span tal:content="string: ${e/Title}" />
+	    <a tal:content="e/getEmailAddress" 
+	       tal:attributes="href string:mailto:${e/getEmailAddress}"/>
+	  </li>
+	</ul>
+      </div>
+
+      <div id="messengers" tal:condition="messengers">
+	<p><b>Instant Messenger</b></p>
+	<ul class="preview">
+	  <li tal:repeat="m python: [ x.getObject() for x in messengers ]">
+	    <a tal:content="m/Title" 
+	       tal:attributes="href m/getImURL"/>
+	  </li>
+	</ul>
+      </div>
+
+      <div id="websites" tal:condition="websites">
+	<p><b>Web</b></p>
+	<ul class="preview">
+	  <li tal:repeat="w python: [ x.getObject() for x in websites ]">
+	    <a tal:attributes="href w/getWebURL"
+	       tal:content="w/Title" />
+	  </li>
+	</ul>
+      </div>
+
+      <div class="clear"></div>
+
+      <p tal:condition="here/getSendMessagesBy|nothing">
+	<label for="sendMessagesBy">Send Messages By:</label>
+	<span metal:use-macro="python: 
+			       context.widget('sendMessagesBy')" />
+      </p>
+
+      <div id="other-contacts"
+	   tal:define="contacts python: 
+		       here.meta_type == 'TKPerson' and [
+		       'ourPrimaryContactsForThisPerson',
+		       'ourSecondaryContactsForThisPerson',
+		       ] or [
+		       'ourPrimaryContactsForThisOrganisation',
+		       'ourSecondaryContactsForThisOrganisation',
+		       ]">
+	<tal:items repeat="c contacts">
+	  <div tal:define="field python: context.getField(c);
+			   label field/widget/label;
+			   rel field/relationship;"
+	       tal:condition="python: 
+			      view.isRelation(rel)">
+	    <label tal:attributes="for c"
+		   tal:content="python: 
+				'%s:' % field.widget.label" />
+	    <span metal:use-macro="python:context.widget(c)" />
+	  </div>
+	</tal:items>	      
+      </div>
+
+      <p tal:condition="here/getJobTitle|nothing">
+	<label for="jobTitle">Job title:</label>
+	<br />
+	<span tal:content="here/getJobTitle" /><span tal:condition="here/getDepartment" tal:content="string:, ${here/getDepartment}" />
+      </p>
+
+    </div>
+
+  </fieldset>
+
+</metal:contactdetails>
+

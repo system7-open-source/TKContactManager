@@ -1,0 +1,7 @@
+/* TKContact Manager general styles */
+
+div.googleMapEdit input[type='text'] {
+    width: 400px;
+    margin-bottom: 10px;
+}
+

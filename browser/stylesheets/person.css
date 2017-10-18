@@ -1,0 +1,67 @@
+/* Styles specific to the TKContactManager views.
+
+   This is explicitly included from various page templates, since it only
+   pertains to a handful of them. If we wanted something more sitewide,
+   we could have used the portal_css registry instead.
+ */
+
+
+fieldset.foldable.closed .info {
+    display: none;
+}
+
+.preview.closed li.extra {
+    display: none;
+}
+
+.opener {
+    height: auto;
+}
+
+.opener a {
+    cursor: pointer;
+}
+
+fieldset.details ul {
+    padding: 0px; margin: 0px;
+}
+
+fieldset.details ul li {
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0px: padding: 0px;
+}
+
+fieldset.details ul.wide li {
+    float: left;
+    padding-right: 15px;
+    margin-bottom: 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+#addresses {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#numbers, #emails, #websites, #messengers {
+    float: left;
+    width: 200px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    background-color: #f0f0f0;
+    padding: 5px;
+}
+
+#emails {
+
+}
+
+div.address-map {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 10px;
+}

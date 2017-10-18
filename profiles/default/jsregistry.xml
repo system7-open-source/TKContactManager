@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts">
+  
+ <javascript 
+    cacheable="True" compression="full" cookable="True"
+    enabled="True" 
+    id="++resource++TKContactManager.scripts/address_lookup.js" 
+    inline="False"
+    expression="object/@@maps_googlemaps_enabled_view/enabled | nothing" />
+
+
+</object>
