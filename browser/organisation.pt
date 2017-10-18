@@ -80,6 +80,21 @@
 	    <span metal:use-macro="python: context.widget('VATNumber')" />
 	  </div>
 	</fieldset>
+	
+	<tal:extraschema define="extraschemata python:
+				 getattr(here, 'extraschemata', [])">
+	  <fieldset class="foldable"
+		    tal:repeat="schemata extraschemata">
+	    <legend tal:content="schemata"></legend>
+	    <tal:extrafield repeat="f python:here.Schema().getSchemataFields(schemata)">
+	      <!-- check the field has a value -->
+	      <div class="info" tal:condition="python:f.getAccessor(here)()">
+		<label tal:attributes="for f/getName"><span tal:replace="f/widget/label" />:</label>
+		<span metal:use-macro="python: context.widget(f.getName())" />
+	      </div>
+	    </tal:extrafield>
+	  </fieldset>
+	</tal:extraschema>
 
 
 	<fieldset class="foldable"
