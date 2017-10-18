@@ -23,10 +23,10 @@ Main features
     * direct co-worker relationship
     * parent-subsidiary/associate relationship
 
-* simple yet powerful and flexible mechanism providing multiple independent diaries and annotations which can be associated to persons and organisations in order to capture and store any useful information (e.g. a diary describing a history of all the interactions between entities)
+* simple yet powerful and flexible mechanism providing multiple independent diaries and annotations which can be associated to persons and organisations in order to capture and store any useful information (e.g. a diary describing a history of all the interactions between entities) <soon>
 * several new content types (Address, E-mail Address, Instant Messenger Contact, Organisation, Person, Share, Telephone Number, Web Page)
 * integrated with Google Maps (depends on the Maps Plone product)
-* integrated with Diaries
+* integrated with Diaries <soon>
 * easily expandable to incorporate new fields and new relations (see extraschema in the product directory and the PPPTKContactManager branch for an example on how to use the extraschema facility)
 
 

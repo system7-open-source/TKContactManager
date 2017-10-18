@@ -128,5 +128,107 @@ extraschema = Schema((
         schemata='PPP',
         allowed_types=['SmifProject','PPPSPC'],
     ),    
+
+    RelationField(
+        name='fmContractorForProspects',
+        widget=ReferenceBrowserWidget(
+            label='FM contractor for prospects',
+            label_msgid='TKContactManager_label_fmContractorForProspects',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPProspect']},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='fmcontractor_fmcontractorforprospects',
+        schemata='PPP',
+        allowed_types=['PPPProspect'],
+    ),    
+    
+    RelationField(
+        name='clientForProspects',
+        widget=ReferenceBrowserWidget(
+            label='Client for prospects',
+            label_msgid='TKContactManager_label_clientForProspects',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPProspect']},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='client_clientforprospects',
+        schemata='PPP',
+        allowed_types=['PPPProspect'],
+    ),    
+    
+    RelationField(
+        name='constructorForProspects',
+        widget=ReferenceBrowserWidget(
+            label='Constructor for prospects',
+            label_msgid='TKContactManager_label_constructorForProspects',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPProspect']},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='constructor_constructorforprospects',
+        schemata='PPP',
+        allowed_types=['PPPProspect'],
+    ),    
+    
+    RelationField(
+        name='projCoForProspects',
+        widget=ReferenceBrowserWidget(
+            label='ProjCo for prospects',
+            label_msgid='TKContactManager_label_projCoForProspects',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPProspect']},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='projco_projcoforprospects',
+        schemata='PPP',
+        allowed_types=['PPPProspect'],
+    ),    
+    
+    RelationField(
+        name='shareholderForProspects',
+        widget=ReferenceBrowserWidget(
+            label='Shareholder for prospects',
+            label_msgid='TKContactManager_label_shareholderForProspects',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPProspect']},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='shareholders_shareholderforprospects',
+        schemata='PPP',
+        allowed_types=['PPPProspect'],
+    ),    
+    
+    RelationField(
+        name='seniorLenderForProspects',
+        widget=ReferenceBrowserWidget(
+            label='Senior lender for prospects',
+            label_msgid='TKContactManager_label_seniorLenderForProspects',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPProspect']},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='seniorlender_seniorlenderforprospects',
+        schemata='PPP',
+        allowed_types=['PPPProspect'],
+    ),    
     
     ),)
