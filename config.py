@@ -69,10 +69,7 @@ DEPENDENCIES = []
 
 # Dependend products - not quick-installed - used in testcase
 # override in custom configuration
-PRODUCT_DEPENDENCIES = ('ATCountryWidget',
-                        'ATReferenceBrowserWidget',
-                        'Maps',
-                        'Relations')
+PRODUCT_DEPENDENCIES = ('Maps', 'Relations','ATCountryWidget')
 
 # You can overwrite these two in an AppConfig.py:
 # STYLESHEETS = [{'id': 'my_global_stylesheet.css'},

@@ -4,19 +4,78 @@
 # class.
 
 from Products.Archetypes.atapi import *
+from Products.Relations.field import RelationField
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+     ReferenceBrowserWidget
 
 extraschema = Schema((
-
-    StringField(
-        name='someExtraData',
-        widget=StringWidget(
-            label='Some Extra Data',
-            label_msgid='TKContactManager_label_someExtraData',
+        
+    RelationField(
+        name='fmContactForSites',
+        widget=ReferenceBrowserWidget(
+            label='FM Contact for Sites',
+            label_msgid='TKContactManager_label_fmContactForSites',
             i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPSite',]},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
         ),
-        required=0,
-        schemata="An Extra Schemata",
-        searchable=0,
+        multiValued=1,
+        relationship='fmContacts_fmContactForSites',
+        schemata='PPP',
+        allowed_types=['PPPSite',],
+    ),
+
+    RelationField(
+        name='clientContactForSites',
+        widget=ReferenceBrowserWidget(
+            label='Client Contact for Sites',
+            label_msgid='TKContactManager_label_clientContactForSites',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPSite',]},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
         ),
+        multiValued=1,
+        relationship='clientContacts_clientContactForSites',
+        schemata='PPP',
+        allowed_types=['PPPSite',],
+    ),
+    
+    RelationField(
+        name='regionalDirectorForRegions',
+        widget=ReferenceBrowserWidget(
+            label='Regional Director for Regions',
+            label_msgid='TKContactManager_label_regionalDirectorForRegions',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPRegion',]},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='regionalDirector_regionalDirectorForRegions',
+        schemata='PPP',
+        allowed_types=['PPPRegion',],
+    ),
+    
+    RelationField(
+        name='ledAcquisitions',
+        widget=ReferenceBrowserWidget(
+            label='Led Acquisitions',
+            label_msgid='TKContactManager_label_ledAcquisitions',
+            i18n_domain='TKContactManager',
+            base_query={'portal_type':['PPPAcquisition',]},
+	    show_path=0,
+	    show_results_without_query=1,
+	    allow_browse=1,
+        ),
+        multiValued=1,
+        relationship='acquisitionLead_ledAcquisitions',
+        schemata='PPP',
+        allowed_types=['PPPAcquisition',],
+    ),
     
     ),)

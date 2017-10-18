@@ -90,7 +90,6 @@ schema = Schema((
             label='Annotations',
             label_msgid='TKContactManager_label_annotations',
             i18n_domain='TKContactManager',
-            hide_inaccessible=1,
         ),
         multiValued=1,
         relationship='concerningorganisation_annotations'
@@ -102,7 +101,6 @@ schema = Schema((
             label='Diaries',
             label_msgid='TKContactManager_label_diaries',
             i18n_domain='TKContactManager',
-            hide_inaccessible=1,
         ),
         multiValued=1,
         relationship='concerningorganisation_diaries'
@@ -225,6 +223,11 @@ class TKOrganisation(ATFolder):
 
     ##code-section class-header #fill in your manual code here
     implements(ITKOrganisation)
+    
+    # Import the extraschema file (defining additional schema for this content
+    # class) if it exists. Fail silently.
+    from Products.TKContactManager.extraschema import extraschemas
+    schema, extraschemata = extraschemas.gen_extraschema(meta_type, schema)
     ##/code-section class-header
 
     # Methods
