@@ -38,15 +38,11 @@ See file config.py.
 * Maps (http://plone.org/products/maps)
 * Relations (http://plone.org/products/relations) - use the code from the svn.
 
-#summary The UML model used to generate the initial skeleton of this Plone product.
-= Introduction =
 
-This section concerns the UML model used to generate the initial skeleton of this Plone product.
+UML model
+---------
+This section concerns the UML model used to generate the initial skeleton of this Plone product.  The model was created with the `Poseidon for UML <http://www.gentleware.com/uml-software-community-edition.html>`_ CASE tool. The model can be downloaded `here <http://tkcontactmanager.googlecode.com/files/TKContactManager.zuml>`_ or `here <http://www.codeforge.com/article/392101>`_.
 
-
-= Details =
-
-The model was created with the [http://www.gentleware.com/uml-software-community-edition.html Poseidon for UML] case tool. It can be found [http://tkcontactmanager.googlecode.com/files/TKContactManager.zuml here].
 
 Setting up and logging in
 -------------------------
